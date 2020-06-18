@@ -1,2 +1,3 @@
 # FinalExam
-Starter Code for PowerShell Final
+#Students will add their code to the "PowerShell Final Exam.ps1' file
+#The 'Capstone Sxcripts' folder contains the sample scripts referenced on page 3 of the final exam
