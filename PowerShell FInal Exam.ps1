@@ -1,4 +1,7 @@
-#ITNET-159 - Final Exam
+#PowewerShell - Final Exam
+#Student Name:
+#Course #:
+#Date:
 ##########################################################
 
 #Question #1
