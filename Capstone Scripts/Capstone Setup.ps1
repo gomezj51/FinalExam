@@ -11,6 +11,8 @@ Get-NetAdapter -Physical
 
 #Remove IP address
 $interface = Get-NetAdapter -Physical | Get-NetIPInterface -AddressFamily "IPv4"
+#if DHCP is enabled there's nothing to do
+#If DHCP is disabled (static IP address), remove the default gateway, remove DNS and then enable DHCP, which will delete static IP
 If ($interface.Dhcp -eq "Disabled") {
  # Remove existing gateway
  If (($interface | Get-NetIPConfiguration).Ipv4DefaultGateway) { $interface | Remove-NetRoute -Confirm:$false }
@@ -80,7 +82,7 @@ Get-ADGroup -Filter * | Select-Object name, groupscope
 
 #region - config DHCP
 Add-WindowsFeature -IncludeManagementTools dhcp
-#Add local DCHP groups ìDHCP Administratorsî and ìDHCP Usersî 
+#Add local DCHP groups ‚ÄúDHCP Administrators‚Äù and ‚ÄúDHCP Users‚Äù 
 #https://blogs.technet.microsoft.com/craigf/2013/06/23/installing-dhcp-on-windows-server-2012-did-not-create-the-local-groups/
 netsh dhcp add securitygroups
 
@@ -89,14 +91,14 @@ Add-DhcpServerInDC
 
 #Remove notification
 Set-ItemProperty `
-        ñPath registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ServerManager\Roles\12 `
-        ñName ConfigurationState `
-        ñValue 2
+        ‚ÄìPath registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ServerManager\Roles\12 `
+        ‚ÄìName ConfigurationState `
+        ‚ÄìValue 2
 
 #############################
 ##Create a DHCP scope for the 192.168.20.0 subnet called Main Scope w/ a range of 192.168.20.200-.250
     Add-DhcpServerv4Scope `
-        -Name ì192.168.20.0î `
+        -Name ‚Äú192.168.20.0‚Äù `
         -StartRange 192.168.20.200 `
         -EndRange 192.168.20.250 `
         -SubnetMask 255.255.255.0 `
