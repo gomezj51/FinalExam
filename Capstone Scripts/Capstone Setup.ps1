@@ -283,4 +283,3 @@ Get-ADUser -Filter "name -like 'Enterprise_Admin'"
 Get-ADUser -Filter "name -like 'Enterprise_Admin'" | Set-ADUser -UserPrincipalName "Enterprise_Admin@ITNET-112.pri" -SamAccountName "Enterprise_Admin"
 
 #endregion - Create User Accounts
-/meme :delete-template [FinalExam]
